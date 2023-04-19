@@ -1,0 +1,99 @@
+<h1>Productos</h1>
+<div class="container">
+    <div class="buttons">
+        <button id="addButon" title="Agregar Producto">Agregar</button>
+    </div>
+    <div class="formContainer invisible">
+        <div class="manageProduct">
+            <form id="formManageProduct" action="/api/products">
+                <label for="productName">
+                    Nombre: <input type="text" name="productName" id="productName" placeholder="Nombre del Producto">
+                </label>
+                <label for="productDescription">
+                    Descripción: <input type="text" name="productDescription" id="productDescription"
+                        placeholder="Descripción">
+                </label>
+                <label for="productPrice">
+                    Precio: <input type="number" name="productPrice" id="productPrice" placeholder="Precio" min="0">
+                </label>
+                <label for="productStatus">
+                    Estado: <select name="productStatus" id="productStatus">
+                        <option value="1" selected>Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </label>
+                <label for="productCategory">
+                    Categoría: <input type="text" name="productCategory" id="productCategory" placeholder="Categoria">
+                </label>
+                <label for="productCode">
+                    Código: <input type="text" name="productCode" id="productCode" placeholder="Código de Producto">
+                </label>
+                <label for="productStock">
+                    Stock: <input type="number" name="productStock" id="productStock" placeholder="Stock de Productos"
+                        min="0">
+                </label>
+                <div class="formButtons">
+                    <button id="saveButton" type="submit">Guardar</button>
+                    <button id="cancelButton" type="reset">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="productsContainer">
+        <h2>Listado de Productos</h2>
+        {{#if hayProducts}}
+        <ul>
+            <li>
+                <article class="card">
+                    <div class="card--data">
+                        <h3><u>NOMBRE</u></h3>
+                        <h3><u>PRECIO</u></h3>
+                        <img src="https://via.placeholder.com/220x220" alt="image_placeholder">
+                        <h3><u>CATEGORÍA</u></h3>
+                        <h3><u>DESCRIPCIÓN</u></h3>
+                        <h3><u>STOCK</u></h3>
+                    </div>
+                    <div class="card--buttons">
+                        <button class="editProduct" disabled>
+                            Editar
+                        </button>
+                        <button class="editProduct" disabled>
+                            Eliminar
+                        </button>
+                    </div>
+                </article>
+            </li>
+            {{#each products}}
+            <li>
+                <article class="card" id="{{this._id}}">
+                    <div class="card--data">
+                        <h3>{{this.productName}}</h3>
+                        <h3>{{this.productPrice}}</h3>
+                        <img src="https://via.placeholder.com/220x220" alt="image_placeholder">
+                        <p>{{this.productCategory}}</p>
+                        <p>{{this.productDescription}}</p>
+                        <p>{{this.productStock}}</p>
+                    </div>
+                    <div class="card--buttons">
+                        <button title="Editar Producto" class="editProduct">
+                            Editar
+                        </button>
+                        <button title="Eliminar Producto" class="deleteProduct">
+                            Eliminar
+                        </button>
+                    </div>
+
+                </article>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>
+            No hay productos para mostrar
+        </p>
+        {{/if}}
+    </div>
+
+
+    <script src="./js/manageProducts.js"></script>

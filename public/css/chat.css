@@ -1,0 +1,252 @@
+.invisible {
+    display: none !important;
+}
+
+*,
+*::after,
+*::before {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    display: block;
+    user-select: none;
+}
+
+input {
+    outline: none;
+}
+
+body {
+    background-color: #160040;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+h1,
+h2 {
+    margin: 0 auto;
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+    background-color: #4C0070;
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+main .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    width: calc(100vw - 30px);
+}
+
+main .container .loginContainer {
+    background-color: #4C0070;
+    display: flex;
+    width: 80%;
+}
+
+main .container .loginContainer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+main .container .loginContainer form label {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .container .loginContainer form label input {
+    width: 80%;
+    font-size: 2rem;
+    padding: .5rem;
+    text-align: center;
+}
+
+main .container .loginContainer form button {
+    width: 30%;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding: .5rem;
+    background-color: #9A0680;
+    color: white;
+}
+
+main .container .chatContainer {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+main .container .chatContainer .chat {
+    background-color: #4C0070;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 5rem);
+    min-width: 45rem;
+    width: 75%;
+    overflow: hidden;
+}
+
+main .container .chatContainer .chat .chat-body {
+    height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+main .container .chatContainer .chat .chat-body .message {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    max-width: 60%;
+}
+
+main .container .chatContainer .chat .chat-body .message .message-text {
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    max-width: 100%;
+    align-self: flex-start;
+    background-color: #F16767;
+    box-shadow: 5px 5px 5px #0004;
+
+}
+
+main .container .chatContainer .chat .chat-body .message .message-text a {
+    font-size: 1rem;
+    color: #F5EAEA;
+}
+
+main .container .chatContainer .chat .chat-body .message .message-text p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+main .container .chatContainer .chat .chat-body .message .message-time {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #666;
+}
+
+main .container .chatContainer .chat .chat-body .message .message-time .messageDate {
+    text-shadow: 5px 5px 5px #0004;
+}
+
+.sent {
+    align-self: flex-end;
+}
+
+.sent .message-text {
+    background-color: #FFB84C !important;
+    align-self: flex-end !important;
+}
+
+.sent .message-time {
+    text-align: right;
+}
+
+main .container .chatContainer .chat .chat-footer {
+    display: flex;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-top: 1px solid #ccc;
+}
+
+main .container .chatContainer .chat .chat-footer input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background-color: #fff;
+    margin-right: 10px;
+}
+
+main .container .chatContainer .chat .chat-footer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background-color: #0084ff;
+    color: #fff;
+    cursor: pointer;
+}
+
+main .container .chatContainer .activeUsersContainer {
+    background-color: #4C0070;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 5rem);
+    min-width: 25rem;
+    width: 30%;
+    overflow: hidden;
+}
+
+main .container .chatContainer .activeUsersContainer ul {
+    width: 80%;
+    margin: 0 auto;
+    overflow-y: auto;
+}
+
+main .container .chatContainer .activeUsersContainer ul li {
+    text-align: center;
+    margin: 1rem;
+    padding: .2rem;
+    background-color: #9A0680;
+    border-radius: 5px;
+}
+
+main .container .chatContainer .activeUsersContainer ul li a {
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    width: 100%;
+    height: 100%;
+    display: block;
+}

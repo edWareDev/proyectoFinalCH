@@ -1,0 +1,58 @@
+<h1>Tienda</h1>
+<div class="container">
+    <div class="itemsContainer">
+        <h2>Productos</h2>
+        {{#if hayProducts}}
+        <ul class="cards--container">
+            {{#each products}}
+            {{#if this.productStatus }}
+            <li>
+                <article class="card" id="{{this._id}}">
+                    <div class="card--data">
+                        <h3>{{this.productName}}</h3>
+                        <img src="https://via.placeholder.com/330" alt="image_placeholder">
+                        <small>{{this.productCategory}}</small>
+                        <p>{{this.productDescription}}</p>
+                        <h4>{{this.productStock}} unidades disponibles.</h4>
+                    </div>
+                    <button title="Agregar al Carrito" class="addToCart">
+                        <h4><small>US$</small>{{this.productPrice}}.00<i class="fa-solid fa-cart-plus"></i></h4>
+                    </button>
+                </article>
+            </li>
+            {{/if}}
+            {{/each}}
+        </ul>
+        {{else}}
+        <p>
+            No hay productos para mostrar
+        </p>
+        {{/if}}
+    </div>
+    <div class="cart">
+        <h2>
+            Carrito
+        </h2>
+        <div class="cartOptions">
+            <a href="#" id="createCart">Crear nuevo carro...</a>
+            <label for="cartID">
+                ID: <input list="cartsId" type="text" name="cartID" id="cartID" placeholder="ID del carrito">
+                {{#if hayCarts}}
+                <datalist id="cartsId">
+                    {{#each carts}}
+                    <option value="{{this._id}}">
+                        {{/each}}
+                </datalist>
+                {{/if}}
+            </label>
+            <button title="Actualizar" class="updateCart">
+                Actualizar
+            </button>
+        </div>
+        <div class="cartItems">
+
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="./js/cartOptions.js"></script>
