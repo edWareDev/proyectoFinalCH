@@ -7,7 +7,7 @@ export const routerVistas = Router()
 routerVistas.get('/', async (req, res, next) => {
     const queryParams = req.query;
     console.log(queryParams);
-    const products = await productsManager.getProducts(queryParams.limit, queryParams.page, queryParams.query, queryParams.sort);
+    const products = await productsManager.getProductsWithFilters(queryParams.limit, queryParams.page, queryParams.query, queryParams.sort);
     const carts = await cartsManager.getCarts()
     res.render('inicio', {
         cssName: 'inicio',
