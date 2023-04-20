@@ -8,18 +8,7 @@ cartsRouter.get('/', async (req, res) => {
     const queryParams = req.query;
     const allCarts = await cartsManager.getCarts()
     console.log(allCarts);
-    const resultado = [];
-
-    if (queryParams.limit) {
-        for (let product = 0; product <= queryParams.limit - 1; product++) {
-            if (allCarts[product]) {
-                resultado.push(allCarts[product]);
-            }
-        }
-        res.json(resultado);
-    } else {
-        res.json(allCarts)
-    }
+    res.json(allCarts)
     // res.json({ "todo": "ok" })
 })
 

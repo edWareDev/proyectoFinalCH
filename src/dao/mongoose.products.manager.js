@@ -7,14 +7,40 @@ class ProductsManager {
     constructor() {
         this.#productsDb = mongoose.model('products', schemaProducts)
     }
-    async getProducts() {
+
+    async getProducts(limit = 10, page = 1, query = 'all', sort = 'none') {
+        console.log(arguments);
         try {
-            const allProducts = await this.#productsDb.find().lean()
-            return allProducts
+            const sortMap = {
+                'none': undefined,
+                'asc': (a, b) => a.productPrice - b.productPrice,
+                'des': (a, b) => b.productPrice - a.productPrice
+            };
+
+            const sortQuery = sortMap[sort];
+            const queryFilter = query !== 'all' ? { productCategory: query } : {};
+
+            const allProducts = await this.#productsDb
+                .find(queryFilter)
+                .skip(limit * (page - 1))
+                .lean();
+
+            if (sortQuery) {
+                console.log(sortQuery);
+                allProducts.sort(sortQuery);
+            }
+
+            const productsToReturn = allProducts.slice(0, limit);
+
+            return productsToReturn;
         } catch (error) {
-            throw new Error({ error: error.message })
+            const errorMessage = `Error occurred while fetching products: ${error.message}`;
+            throw new Error(errorMessage);
         }
+
     }
+
+
     async addProduct(product) {
         if (!product.productName || !product.productDescription || !product.productPrice || !product.productStatus || !product.productCategory || !product.productCode || !product.productStock) {
             throw new Error('All fields are required')
