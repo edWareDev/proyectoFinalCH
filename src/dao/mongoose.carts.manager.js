@@ -68,16 +68,22 @@ class CartsManager {
 
 
     async deleteProductOfCart(cartId, productId) {
+        console.log(cartId, productId);
         try {
-            const cart = this.getCartByID(cartId)
-            const productSelected = cart.products.find(product => product.product === productId)
-            if (productSelected) {
-                this.#cartsDb.findOneAndUpdate({ _id: ObjectId(cartId) }, { products: { product: "p111", quantity: 0 } })
+            const cart = await this.getCartByID(cartId)
+            const productIndex = cart.products.findIndex(product => product.product == productId)
+            console.log('productIndex:', productIndex);
+            console.log(cart.products);
+            if (productIndex === -1) {
+                throw new Error('Producto no encontrado en el carrito.')
+            } else {
+                console.log('producto Encontrado');
+                cart.products.splice(productIndex, 1)
+                await this.#cartsDb.updateOne({ _id: cartId }, { $set: { products: cart.products } })
             }
-            await cart.save()
-            return cart.lean()
+            return cart.products
         } catch (error) {
-            throw new Error('This cart does not exist');
+            throw new Error('No se puede eliminar el producto');
         }
     }
 }

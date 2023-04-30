@@ -47,11 +47,11 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
 })
 
 
-// cartsRouter.delete('/:pid', async (req, res) => {
-//     try {
-//         const deletedProduct = await productManager.deleteProduct(req.params.pid)
-//         res.json(deletedProduct)
-//     } catch (error) {
-//         res.status(404).json({ error: error.message })
-//     }
-// })
+cartsRouter.delete('/:cid/products/:pid', async (req, res) => {
+    try {
+        const products = await cartsManager.deleteProductOfCart(req.params.cid, req.params.pid)
+        res.json(products)
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+})
