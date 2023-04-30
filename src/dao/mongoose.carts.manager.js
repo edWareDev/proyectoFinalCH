@@ -66,6 +66,38 @@ class CartsManager {
         }
     }
 
+    async updateProductOfCart(cartId, productId, quantity) {
+        try {
+            quantity = quantity < 0 ? 0 : quantity;
+            const cart = await this.getCartByID(cartId)
+            const productIndex = cart.products.findIndex(product => product.product == productId)
+            if (productIndex === -1) {
+                throw new Error('Producto no encontrado en el carrito.')
+            } else {
+                const updatedCart = { ...cart };
+                const productSelected = updatedCart.products.find(product => product.product == productId)
+                productSelected.quantity = quantity;
+                await this.#cartsDb.updateOne({ _id: cartId }, { $set: { products: updatedCart.products } });
+                return updatedCart
+            }
+        } catch (error) {
+            throw new Error('No se puede actualizar el producto');
+        }
+    }
+
+    async updateProductsOfCart(cartId, products) {
+        // console.log('Probando');
+        try {
+            const cart = await this.getCartByID(cartId)
+            const updatedCart = { ...cart };
+            updatedCart.products = products;
+            await this.#cartsDb.updateOne({ _id: cartId }, { $set: { products: products } });
+            console.log(updatedCart);
+            return updatedCart
+        } catch (error) {
+            throw new Error('No se puede actualizar el producto');
+        }
+    }
 
     async deleteProductOfCart(cartId, productId) {
         console.log(cartId, productId);
@@ -81,6 +113,19 @@ class CartsManager {
                 cart.products.splice(productIndex, 1)
                 await this.#cartsDb.updateOne({ _id: cartId }, { $set: { products: cart.products } })
             }
+            return cart.products
+        } catch (error) {
+            throw new Error('No se puede eliminar el producto');
+        }
+    }
+
+    async deleteProductsOfCart(cartId) {
+        console.log(cartId);
+        try {
+            const cart = await this.getCartByID(cartId)
+            console.log('producto Encontrado');
+            cart.products = []
+            await this.#cartsDb.updateOne({ _id: cartId }, { $set: { products: cart.products } })
             return cart.products
         } catch (error) {
             throw new Error('No se puede eliminar el producto');

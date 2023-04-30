@@ -46,6 +46,35 @@ cartsRouter.post('/:cid/product/:pid', async (req, res) => {
     }
 })
 
+cartsRouter.put('/:cid', async (req, res) => {
+    console.log('Estamos aqui');
+    try {
+        console.log(req.body);
+        const products = await cartsManager.updateProductsOfCart(req.params.cid, req.body)
+        res.json(products)
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+})
+
+cartsRouter.put('/:cid/products/:pid', async (req, res) => {
+    console.log('Estaremos aqui?');
+    try {
+        const products = await cartsManager.updateProductOfCart(req.params.cid, req.params.pid, req.body.quantity)
+        res.json(products)
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+})
+
+cartsRouter.delete('/:cid', async (req, res) => {
+    try {
+        const products = await cartsManager.deleteProductsOfCart(req.params.cid)
+        res.json(products)
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+})
 
 cartsRouter.delete('/:cid/products/:pid', async (req, res) => {
     try {
